@@ -14,12 +14,18 @@ public class Main {
             try {
                 System.out.print("Enter an alarm time (HH:MM::SS): ");
                 String inputTime = scanner.nextLine();
+
                 alarmTime = LocalTime.parse(inputTime, formatter);
                 System.out.println("Alarm set for " + alarmTime);
             } catch (DateTimeParseException e) {
                 System.out.println("Invalid format, please use HH:MM:SS");
             }
         }
-        scanner.close();
+
+        AlarmClock alarmClock = new AlarmClock(alarmTime);
+        Thread alarmThread = new Thread(alarmClock);
+        alarmThread.start();
+
+//        scanner.close();
     }
 }
