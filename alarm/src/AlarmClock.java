@@ -3,14 +3,17 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalTime;
+import java.util.Scanner;
 
 public class AlarmClock implements Runnable {
     private final LocalTime alarmTime;
     private final String filePath;
+    private final Scanner scanner;
 
-    AlarmClock(LocalTime alarmTime, String filePath) {
+    AlarmClock(LocalTime alarmTime, String filePath, Scanner scanner) {
         this.alarmTime = alarmTime;
         this.filePath = filePath;
+        this.scanner = scanner;
     }
 
     @Override
@@ -44,15 +47,17 @@ public class AlarmClock implements Runnable {
             clip.open(audioStream);
             clip.start();
 
-            Thread.sleep(5000);
+            System.out.print("Press Enter to Stop");
+            scanner.nextLine();
+            clip.stop();
+            scanner.close();
+
         } catch (UnsupportedAudioFileException e) {
             System.out.println("Unsupported Audio Format");
         } catch (LineUnavailableException e) {
             System.out.println("Audio Unavailable");
         } catch (IOException e) {
             System.out.println("Error Reading Audio File");
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
     }
 }
