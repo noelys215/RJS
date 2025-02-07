@@ -23,7 +23,7 @@ public class Main {
             }
         }
 
-        AlarmClock alarmClock = new AlarmClock(alarmTime);
+        AlarmClock alarmClock = new AlarmClock(alarmTime, filePath);
         Thread alarmThread = new Thread(alarmClock);
         alarmThread.start();
 

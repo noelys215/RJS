@@ -1,11 +1,16 @@
+import javax.sound.sampled.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalTime;
 
 public class AlarmClock implements Runnable {
     private final LocalTime alarmTime;
+    private final String filePath;
 
-    AlarmClock(LocalTime alarmTime) {
+    AlarmClock(LocalTime alarmTime, String filePath) {
         this.alarmTime = alarmTime;
+        this.filePath = filePath;
     }
 
     @Override
@@ -27,6 +32,27 @@ public class AlarmClock implements Runnable {
         }
 
         System.out.println("\n*ALARM NOISES*");
-        Toolkit.getDefaultToolkit().beep();
+        playSound(filePath);
+    }
+
+    private void playSound(String filePath) {
+        File audioFile = new File(filePath);
+
+
+        try (AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile)) {
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.start();
+
+            Thread.sleep(5000);
+        } catch (UnsupportedAudioFileException e) {
+            System.out.println("Unsupported Audio Format");
+        } catch (LineUnavailableException e) {
+            System.out.println("Audio Unavailable");
+        } catch (IOException e) {
+            System.out.println("Error Reading Audio File");
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
