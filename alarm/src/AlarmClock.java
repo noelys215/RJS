@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.time.LocalTime;
 
 public class AlarmClock implements Runnable {
@@ -24,5 +25,8 @@ public class AlarmClock implements Runnable {
                 System.out.println("Thread Interrupted");
             }
         }
+
+        System.out.println("\n*ALARM NOISES*");
+        Toolkit.getDefaultToolkit().beep();
     }
 }
