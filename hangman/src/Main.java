@@ -16,7 +16,7 @@ public class Main {
         System.out.println("Welcome to Java Hangman");
         System.out.println("***********************");
 
-        while (wrongGuesses < 5) {
+        while (wrongGuesses < 6) {
 
             System.out.print(getHangmanArt(wrongGuesses));
 
@@ -29,14 +29,21 @@ public class Main {
             char guess = scanner.next().toLowerCase().charAt(0);
 
             if (word.indexOf(guess) >= 0) {
-                System.out.println("Correct guess!\n");
+                System.out.println("Correct guess!");
                 for (int i = 0; i < word.length(); i++) {
                     if (word.charAt(i) == guess) wordState.set(i, guess);
                 }
 
+                if (!wordState.contains('_')) {
+                    System.out.print(getHangmanArt(wrongGuesses));
+                    System.out.println("You won!");
+                    System.out.println("The word was: " + word);
+                    break;
+                }
+
             } else {
                 wrongGuesses++;
-                System.out.println("Wrong Guess!\n");
+                System.out.println("Wrong Guess!");
             }
         }
 
