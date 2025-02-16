@@ -13,6 +13,22 @@ public class Main {
         System.out.println("Symbols: 🍒 🍉 🍋 🔔 ⭐ ");
         System.out.println("*************************");
 
+        while (balance > 0) {
+            System.out.println("Current Balance: $" + balance);
+            System.out.print("Place your bet amount: ");
+            bet = scanner.nextInt();
+
+            if (bet > balance) {
+                System.out.println("Insufficient Funds");
+                continue;
+            } else if (bet <= 0) {
+                System.out.println("Bet must be greater than 0");
+            } else {
+                balance -= bet;
+                System.out.println("$" + balance);
+            }
+        }
+
         scanner.close();
     }
 }
