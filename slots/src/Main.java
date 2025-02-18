@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -23,12 +24,24 @@ public class Main {
                 continue;
             } else if (bet <= 0) {
                 System.out.println("Bet must be greater than 0");
+                continue;
             } else {
                 balance -= bet;
-                System.out.println("$" + balance);
             }
+            System.out.println("Spinning...");
+            spinRow();
         }
-
         scanner.close();
+    }
+
+    static String[] spinRow() {
+
+        String[] symbols = {"🍒", "🍉", "🍋", "🔔", "⭐"};
+        String[] row = new String[3];
+        Random random = new Random();
+
+        System.out.println(symbols[random.nextInt(5)]);
+
+        return new String[0];
     }
 }
