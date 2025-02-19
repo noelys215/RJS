@@ -35,13 +35,14 @@ public class Main {
     }
 
     static String[] spinRow() {
-
         String[] symbols = {"🍒", "🍉", "🍋", "🔔", "⭐"};
         String[] row = new String[3];
         Random random = new Random();
 
-        System.out.println(symbols[random.nextInt(5)]);
+        for (int i = 0; i < 3; i++) {
+            row[i] = symbols[random.nextInt(symbols.length)];
+        }
 
-        return new String[0];
+        return row;
     }
 }
