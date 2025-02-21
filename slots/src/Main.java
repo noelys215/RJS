@@ -8,6 +8,7 @@ public class Main {
         int bet;
         int payout;
         String[] row;
+        String playAgain;
 
         System.out.println("*************************");
         System.out.println("  Welcome to Java Slots  ");
@@ -18,6 +19,7 @@ public class Main {
             System.out.println("Current Balance: $" + balance);
             System.out.print("Place your bet amount: ");
             bet = scanner.nextInt();
+            scanner.nextLine();
 
             if (bet > balance) {
                 System.out.println("Insufficient Funds");
@@ -29,8 +31,26 @@ public class Main {
                 balance -= bet;
             }
             System.out.println("Spinning...");
-            spinRow();
+            row = spinRow();
+            printRow(row);
+            payout = getPayout(row, bet);
+
+            if (payout > 0) {
+                System.out.println("You won $" + payout);
+                balance += payout;
+            } else {
+                System.out.println("Sorry you lost this round");
+            }
+            System.out.println("Do you want to play again?: (Y/N)");
+            playAgain = scanner.nextLine().toUpperCase();
+
+            if (!playAgain.equals("Y")) {
+                break;
+            }
         }
+
+        System.out.println("GAME OVER! Final Balance: $" + balance);
+
         scanner.close();
     }
 
